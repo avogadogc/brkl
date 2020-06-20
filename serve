@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+  args=(serve -d /_site --watch --force_polling -H 0.0.0.0 -P 4000)
+else
+  args=("$@")
+fi
+
+set -x
+docker run -it --rm -v "$(pwd)":/usr/src/app -p "4000:4000" starefossen/github-pages \
+    jekyll ${args[@]}
